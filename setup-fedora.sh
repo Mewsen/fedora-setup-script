@@ -19,6 +19,7 @@ PACKAGES=(
     gnome-tweaks
     npm
     nodejs
+    jq
 
     # For yubikey
     gnupg2
