@@ -45,9 +45,6 @@ echo "Installing packages..."
 sudo dnf install -y "${PACKAGES[@]}"
 npm config set prefix '~/.local/'
 
-echo "Installing Development Tools group..."
-sudo dnf groupinstall -y "Development Tools"
-
 git config --global user.name "Michael Tews"
 git config --global user.email michael@tews.dev
 git config --global user.gpgsign true
