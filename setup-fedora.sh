@@ -64,20 +64,22 @@ sudo dnf config-manager setopt fedora-cisco-openh264.enabled=1
 echo "Installing Docker..."
 sudo dnf -y install dnf-plugins-core
 sudo dnf-3 config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-wget https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.rpm --output-document /tmp/docker-desktop.rpm
+curl -L https://desktop.docker.com/linux/main/amd64/docker-desktop-x86_64.rpm -o /tmp/docker-desktop.rpm
 sudo dnf install /tmp/docker-desktop.rpm -y
 
 # Install Yubico Authenticator
 echo "Installing Yubico Authenticator..."
-wget --output-document /tmp/yubi-auth.tar.gz https://developers.yubico.com/yubioath-flutter/Releases/yubico-authenticator-latest-linux.tar.gz
-mkdir -p $HOME/yubi
-tar -xvf /tmp/yubi-auth.tar.gz --directory=$HOME/.local/share/
+curl -L https://developers.yubico.com/yubioath-flutter/Releases/yubico-authenticator-latest-linux.tar.gz -o /tmp/yubi-auth.tar.gz
+mkdir -p $HOME/.local/bin/
+tar -xvf /tmp/yubi-auth.tar.gz --directory=$HOME/.local/bin/
+pushd $HOME/.local/bin/yubico-authenticator-7.1.1-linux
+./desktop_integration.sh
+popd
+
 
 # Apply custom configurations
 echo "Applying configurations..."
 mkdir -p "$HOME/.config"
-
-echo "alias ll='ls -la'" >> "$HOME/.bashrc"
 
 echo "Configuring GNOME settings..."
 gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
