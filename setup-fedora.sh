@@ -118,10 +118,12 @@ echo "Configuring GTK theme and color scheme..."
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
-# Install YADM
-echo "Installing YADM..."
-wget https://download.opensuse.org/repositories/home:/TheLocehiliosan:/yadm/Fedora_41/noarch/yadm-3.3.0-75.1.noarch.rpm --output-document /tmp/yadm.rpm
-sudo dnf install /tmp/yadm.rpm -y
+# Prompt to install intlde keyboard-layout
+read -p "Install intlde keyboard-layout? (y/n): " answer
+if [[ "$answer" =~ ^[Yy]$ ]]; then
+    echo "Installing intlde keyboard layout..."
+    sudo ./intlde-install.py
+fi
 
 echo "Installation and setup complete!"
 
