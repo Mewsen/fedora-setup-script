@@ -5,7 +5,7 @@ set -u  # Treat unset variables as an error
 set -o pipefail  # Prevent errors in pipelines from being masked
 
 # Check if running Fedora 41
-if ! grep -q "^ID=fedora" /etc/os-release || ! grep -q "^VERSION_ID=\"41\"" /etc/os-release; then
+if ! grep -q "^ID=fedora" /etc/os-release || ! grep -q "^VERSION_ID=41" /etc/os-release; then
     echo "This script is intended for Fedora 41 only. Exiting."
     exit 1
 fi
